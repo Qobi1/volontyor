@@ -38,7 +38,7 @@ class EventAPIView(APIView):
             serializer = EventSerializer(result_page, many=True)
             return paginator.get_paginated_response(serializer.data)
         serializer = EventSerializer(Event.objects.all(), many=True)
-        return Response({"Response": serializer.data}, status=status.HTTP_200_OK, content_type='application/json')
+        return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
 
     @extend_schema(
         request=EventSerializer,  # Specify the serializer for the request
@@ -107,7 +107,7 @@ class VolunteerAPIView(APIView):
         if pk:
             obj = get_object_or_404(Volunteer, pk=pk)
             serializer = VolunteerSerializer(obj)
-            return Response({'Volunteer': serializer.data}, status=status.HTTP_200_OK, content_type='application/json')
+            return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
         elif request.GET.get('page') and request.GET.get('limit'):
             paginator = PageNumberPagination()
             queryset = Volunteer.objects.all().order_by('id')
@@ -178,7 +178,7 @@ class InvestorAPIView(APIView):
         if pk:
             obj = get_object_or_404(Investor, pk=pk)
             serializer = InvestorSerializer(obj)
-            return Response({"Response": serializer.data}, status=status.HTTP_200_OK, content_type='application/json')
+            return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
         elif request.GET.get('offset') and request.GET.get('limit'):
             paginator = PageNumberPagination()
             queryset = Investor.objects.all().order_by('id')
@@ -247,7 +247,7 @@ class NewsAPIView(APIView):
         if pk:
             obj = get_object_or_404(News, pk=pk)
             serializer = NewsSerializer(instance=obj)
-            return Response({"Response": serializer.data}, status=status.HTTP_200_OK, content_type='application/json')
+            return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
         elif request.GET.get('page') and request.GET.get('limit'):
             paginator = PageNumberPagination()
             queryset = News.objects.all().order_by('id')

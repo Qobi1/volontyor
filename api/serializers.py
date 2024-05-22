@@ -35,8 +35,9 @@ class InvestorSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        if instance.image:
-            representation['image'] = f"{BASE_URL}{instance.image.url}"
+        if instance.owner_image:
+            representation['owner_image'] = f"{BASE_URL}{instance.owner_image.url}"
+            representation['company_photos'] = f"{BASE_URL}{instance.company_photos.url}"
         return representation
 
 

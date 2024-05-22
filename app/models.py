@@ -50,6 +50,7 @@ class Event(models.Model):
     image = models.ImageField()
     title = models.CharField(max_length=256)
     description = models.TextField()
+    location = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
